@@ -1,2 +1,10 @@
 .idea
 app/release
+.gradle
+/build/
+
+gradle-app.etting
+
+!gradle-wrapper.jar
+*.ctxt
+*.class

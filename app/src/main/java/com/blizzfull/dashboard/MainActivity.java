@@ -1,21 +1,21 @@
 package com.blizzfull.dashboard;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,9 +24,10 @@ import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ import com.daasuu.ei.Ease;
 import com.daasuu.ei.EasingInterpolator;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
@@ -122,13 +124,49 @@ public class MainActivity extends AppCompatActivity {
         webView.addJavascriptInterface(jsInterface, "blizzfullInterface");
         webView.loadUrl("http://dashboard.blizzfull.com");
 
+
+
         webView.setWebViewClient(new WebViewClient() {
+
+
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if(request.getUrl().toString().equals("file:///android_asset/android---app/restart"))
+                {
+                    webView.loadUrl("http://dashboard.blizzfull.com");
+                    return true;
+                }
+                else if(request.getUrl().toString().equals("file:///android_asset/android---app/wifi"))
+                {
+                    startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    return true;
+                }
+                else
+                {
+                    view.loadUrl(request.getUrl().toString());
+                }
                 return false;
             }
+
+            public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
+                // Redirect to deprecated method, so you can use it in all SDK versions
+                view.loadUrl("file:///android_asset/error.html");
+            }
+
         });
+
+        final Handler h = new Handler();
+        h.postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Calendar rightNow = Calendar.getInstance();
+                int currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
+                if(currentHour == 4) webView.reload();//Reload every day @ 4am
+                h.postDelayed(this, 900000);
+            }
+        }, 900000); // 15 minutes in ms
     }
 
     public void setWallpaper(View v)
