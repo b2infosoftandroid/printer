@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,13 +7,16 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
+    android:id="@+id/rlview"
     android:keepScreenOn="true"
-    tools:context="com.blizzfull.dashboard.MainActivity">
+    tools:context="com.blizzfull.dashboard.Activity.MainActivity">
 
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/webView"
+        android:layout_above="@+id/btnPrint"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:clickable="false" />
 
     <RelativeLayout
@@ -44,7 +46,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="v"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp" />
 
         <TextView
@@ -56,9 +58,25 @@
             android:fontFamily="sans-serif-medium"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp" />
 
     </RelativeLayout>
+    <Button
+        android:id="@+id/btnPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:minWidth="@dimen/_80sdp"
 
+        android:layout_marginBottom="10dp"
+        android:fontFamily="serif"
+        android:background="@drawable/btn_fill_shape"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imgLogo"
+        android:text="Print"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_13sdp" />
 </RelativeLayout>

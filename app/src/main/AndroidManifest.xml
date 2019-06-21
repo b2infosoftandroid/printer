@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blizzfull.dashboard">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -16,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:name="com.blizzfull.dashboard.MainActivity">
+            android:name="com.blizzfull.dashboard.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

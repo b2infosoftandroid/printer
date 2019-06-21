@@ -4,4 +4,15 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="SelectPrinter">Select Printer</string>
+    <string name="bluetooth_printer">Bluetooth Printer</string>
+    <string name="connect">Connect</string>
+    <string name="bluetooth_connection">Bluetooth Printer Connecting...</string>
+    <string name="Printer_Not_Connect">Printer Not Connect</string>
+    <string name="NoBluetooth_AdapterAvailable">No Bluetooth Adapter Available</string>
+    <string name="Bluetooth_device_is_not_Connected">Bluetooth device is not Connected</string>
+    <string name="Printing">Printing</string>
+    <string name="failed">failed</string>
+    <string name="Success">Success</string>
+
 </resources>
